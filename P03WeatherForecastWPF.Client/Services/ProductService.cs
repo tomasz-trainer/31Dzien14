@@ -32,18 +32,19 @@ namespace P03WeatherForecastWPF.Client.Services
             return result;
         }
 
-        public Task<ServiceResponse<Product>> GetProductAsync(int id)
+        public async Task<ServiceResponse<Product>> GetProductAsync(int id)
         {
-             var response = _httpClient.GetAsync($"api/product/{id}");
-             var result = response.Result.Content.ReadFromJsonAsync<ServiceResponse<Product>>();
+             var response = await _httpClient.GetAsync($"api/product/{id}");
+             var result = await response.Content.ReadFromJsonAsync<ServiceResponse<Product>>();
              return result;
         }
 
         public async Task<ServiceResponse<List<Product>>> GetProductsAsync()
         {
             var response = await _httpClient.GetAsync("api/product");
-            var json = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<ServiceResponse<List<Product>>>(json);
+           // var json = await response.Content.ReadAsStringAsync();
+           // var result = JsonConvert.DeserializeObject<ServiceResponse<List<Product>>>(json);
+            var result = await response.Content.ReadFromJsonAsync<ServiceResponse<List<Product>>>();
             return result;
         }
 
