@@ -14,7 +14,7 @@ namespace P07Shop.DataSeeder
                 .RuleFor(p => p.Description, f => f.Commerce.ProductDescription())
                 .RuleFor(p => p.Barcode, f => f.Commerce.Ean13().Substring(12))
                 .RuleFor(p => p.Price, f => f.Random.Double(1, 1000))
-                .RuleFor(p => p.ReleaseDate, f => f.Date.Past());
+                .RuleFor(p => p.ReleaseDate, f => new DateTime(2023,1,1));
 
             var products = prodcutFaker.Generate(100);
 
