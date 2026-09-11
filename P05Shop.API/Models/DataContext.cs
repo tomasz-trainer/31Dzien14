@@ -9,11 +9,15 @@ namespace P05Shop.API.Models
         public DbSet<Product> Products { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            // Configure the database connection string here
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MySuperShop;Integrated Security=True");
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    // Configure the database connection string here
+        //    optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MySuperShop;Integrated Security=True");
 
+        //}
+
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

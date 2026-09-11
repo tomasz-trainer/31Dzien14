@@ -1,4 +1,6 @@
 
+using Microsoft.EntityFrameworkCore;
+using P05Shop.API.Models;
 using P05Shop.API.Services;
 using P06Shop.Shared.Services.ProductService;
 using P06Shop.Shared.Services.WeatherSeervice;
@@ -16,6 +18,11 @@ namespace P05Shop.API
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
 
             builder.Services.AddScoped<IProductService, ProductService>();
