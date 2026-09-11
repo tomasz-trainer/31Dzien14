@@ -33,5 +33,79 @@ namespace P05Shop.API.Controllers
             }
         }
 
+        //https://localhost:5001/api/product/1
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ServiceResponse<bool>>> DeleteProduct([FromRoute] int id)
+        {
+
+            var result = await _productService.DeleteProductAsync(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound(result);
+            }
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<Product>>> UpdateProduct([FromBody] Product product)
+        {
+            var result = await _productService.UpdateProductAsync(product);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound(result);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServiceResponse<Product>>> GetProductById([FromRoute] int id)
+        {
+            var result = await _productService.GetProductAsync(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound(result);
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ServiceResponse<Product>>> AddProduct([FromBody] Product product)
+        {
+            var result = await _productService.CreateProductAsync(product);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+        //https://localhost:5001/api/product/delete?id=1
+        // przyklad endpointu niezgodne z REST
+        [HttpDelete("delete")]
+        public async Task<ActionResult<ServiceResponse<bool>>> DeleteProductOneQuery([FromQuery] int id)
+        {
+            var result = await _productService.DeleteProductAsync(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound(result);
+            }
+        }
     }
 }
