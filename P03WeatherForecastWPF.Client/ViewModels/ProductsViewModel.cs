@@ -95,8 +95,9 @@ namespace P03WeatherForecastWPF.Client.ViewModels
         public async Task NewProductWindow()
         {
             _productDetailsView.Show();
+   
             _productDetailsView.DataContext = this;
-            _selectedProduct = new Product(); // Initialize a new product for creation
+            SelectedProduct = new Product(); // Initialize a new product for creation
         }
 
         [RelayCommand]
@@ -116,6 +117,18 @@ namespace P03WeatherForecastWPF.Client.ViewModels
                 await UpdateProductAsync();
             }
         }
+
+        [RelayCommand]
+        public async Task ShowProductDetails(Product product)
+        {
+            if (product != null)
+            {
+                SelectedProduct = product;
+                _productDetailsView.DataContext = this;
+                _productDetailsView.Show();
+            }
+        }
+
 
     }
 }

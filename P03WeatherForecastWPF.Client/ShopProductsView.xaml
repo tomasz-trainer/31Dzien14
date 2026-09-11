@@ -9,13 +9,19 @@
     <StackPanel>
         <Button Content="New product" Command="{Binding NewProductWindowCommand}"></Button>
         <ListView ItemsSource="{Binding Products}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="200"/>
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="100"/>
-                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="400"/>
-                </GridView>
-            </ListView.View>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding Title}"></Label>
+                        <Label Content="{Binding Description}"></Label>
+                        <Button Content="Edit" 
+                                Command="{Binding DataContext.ShowProductDetailsCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate> 
+            
+            
         </ListView>
     </StackPanel>
     
