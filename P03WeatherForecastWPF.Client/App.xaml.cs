@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using P03WeatherForecastWPF.Client.MessageBox;
 using P03WeatherForecastWPF.Client.Services;
 using P03WeatherForecastWPF.Client.ViewModels;
 using P04WeatherForecastConsole.Client;
+using P06Shop.Shared;
 using P06Shop.Shared.Services.ProductService;
 using P06Shop.Shared.Services.WeatherSeervice;
 using System.Configuration;
@@ -68,7 +70,7 @@ namespace P03WeatherForecastWPF.Client
            // services.AddSingleton<IMeteoService, OpenMeteoService>(); // rejestracja serwisu jako singleton
             services.AddSingleton<IMeteoService, LocalMeteoService>(); // rejestracja serwisu jako singleton
             services.AddSingleton<IProductService, ProductService>(); // rejestracja serwisu jako singleton
-
+            services.AddSingleton<IMeesageDialogService, WpfMessageDialogService>(); // rejestracja serwisu jako singleton
 
         }
 

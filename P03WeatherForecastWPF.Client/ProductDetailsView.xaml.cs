@@ -20,6 +20,7 @@ namespace P03WeatherForecastWPF.Client
         public ProductDetailsView()
         {
             InitializeComponent();
+            
         }
     }
 }

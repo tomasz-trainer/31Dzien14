@@ -14,7 +14,7 @@ namespace P03WeatherForecastWPF.Client.ViewModels
 
         private readonly IProductService _productService;
         private readonly ProductDetailsView _productDetailsView;
-
+        private readonly IMeesageDialogService _messageDialogService;
 
         [ObservableProperty]
         private ObservableCollection<Product> _products;
@@ -25,10 +25,11 @@ namespace P03WeatherForecastWPF.Client.ViewModels
         [ObservableProperty]
         private string _errorMessage;
 
-        public ProductsViewModel(IProductService productService, ProductDetailsView productDetailsView)
+        public ProductsViewModel(IProductService productService, ProductDetailsView productDetailsView, IMeesageDialogService meesageDialogService)
         {
             _productService = productService;
             _productDetailsView = productDetailsView;
+            _messageDialogService = meesageDialogService;
         }
 
         public async Task LoadProductsAsync()
@@ -47,7 +48,7 @@ namespace P03WeatherForecastWPF.Client.ViewModels
 
       
 
-        public async Task CreateProductAsync()
+        private async Task createProductAsync()
         {
             var result = await _productService.CreateProductAsync(_selectedProduct);
             if (result.Success)
@@ -57,10 +58,13 @@ namespace P03WeatherForecastWPF.Client.ViewModels
             else
             {
                 _errorMessage = "Error creating product: " + result.Message;
+                _messageDialogService.ShowMessage("Error creating product: " + result.Message);
+
+
             }
         }
 
-        public async Task UpdateProductAsync()
+        private async Task updateProductAsync()
         {
             var result = await _productService.UpdateProductAsync(_selectedProduct);
             if (result.Success)
@@ -73,6 +77,7 @@ namespace P03WeatherForecastWPF.Client.ViewModels
             }
         }
 
+        [RelayCommand]
         public async Task DeleteProductAsync()
         {
             if (_selectedProduct == null)
@@ -94,6 +99,7 @@ namespace P03WeatherForecastWPF.Client.ViewModels
         [RelayCommand]
         public async Task NewProductWindow()
         {
+            _messageDialogService.ShowMessage("Creating a new product.");
             _productDetailsView.Show();
    
             _productDetailsView.DataContext = this;
@@ -110,11 +116,11 @@ namespace P03WeatherForecastWPF.Client.ViewModels
             }
             if (_selectedProduct.Id == 0)
             {
-                await CreateProductAsync();
+                await createProductAsync();
             }
             else
             {
-                await UpdateProductAsync();
+                await updateProductAsync();
             }
         }
 

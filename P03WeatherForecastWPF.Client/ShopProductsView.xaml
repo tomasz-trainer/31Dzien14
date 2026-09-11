@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="ShopProductsView" Height="450" Width="800">
     <StackPanel>
+        <Label Content="{Binding ErrorMessage}" Background="Red" Visibility="Collapsed"></Label>
         <Button Content="New product" Command="{Binding NewProductWindowCommand}"></Button>
         <ListView ItemsSource="{Binding Products}">
 
