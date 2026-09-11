@@ -52,6 +52,7 @@ namespace P03WeatherForecastWPF.Client
             services.AddTransient<MainWindow>(); // tworzy instancję MainWindow przy każdym żądaniu
             services.AddTransient<SecondWindow>();
             services.AddTransient<ShopProductsView>();
+            services.AddTransient<ProductDetailsView>();
         }
 
         private void ConfigureViewModels(IServiceCollection services)

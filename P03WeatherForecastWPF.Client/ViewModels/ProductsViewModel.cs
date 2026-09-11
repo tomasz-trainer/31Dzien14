@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using P06Shop.Shared;
 using P06Shop.Shared.Services.ProductService;
 using System;
@@ -12,19 +13,22 @@ namespace P03WeatherForecastWPF.Client.ViewModels
     {
 
         private readonly IProductService _productService;
+        private readonly ProductDetailsView _productDetailsView;
+
 
         [ObservableProperty]
         private ObservableCollection<Product> _products;
 
         [ObservableProperty]
         private Product _selectedProduct;
-
+                         
         [ObservableProperty]
         private string _errorMessage;
 
-        public ProductsViewModel(IProductService productService)
+        public ProductsViewModel(IProductService productService, ProductDetailsView productDetailsView)
         {
             _productService = productService;
+            _productDetailsView = productDetailsView;
         }
 
         public async Task LoadProductsAsync()
@@ -84,6 +88,32 @@ namespace P03WeatherForecastWPF.Client.ViewModels
             else
             {
                 _errorMessage = "Error deleting product: " + result.Message;
+            }
+        }
+
+        [RelayCommand]
+        public async Task NewProductWindow()
+        {
+            _productDetailsView.Show();
+            _productDetailsView.DataContext = this;
+            _selectedProduct = new Product(); // Initialize a new product for creation
+        }
+
+        [RelayCommand]
+        public async  Task SaveProductAsync()
+        {
+            if (_selectedProduct == null)
+            {
+                _errorMessage = "No product selected for saving.";
+                return;
+            }
+            if (_selectedProduct.Id == 0)
+            {
+                await CreateProductAsync();
+            }
+            else
+            {
+                await UpdateProductAsync();
             }
         }
 

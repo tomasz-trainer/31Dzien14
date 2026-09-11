@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:P03WeatherForecastWPF.Client"
         mc:Ignorable="d"
         Title="ShopProductsView" Height="450" Width="800">
-    <ListView ItemsSource="{Binding Products}">
-        <ListView.View>
-            <GridView>
-                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="200"/>
-                <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="100"/>
-                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="400"/>
-            </GridView>
-        </ListView.View>
-     </ListView>
+    <StackPanel>
+        <Button Content="New product" Command="{Binding NewProductWindowCommand}"></Button>
+        <ListView ItemsSource="{Binding Products}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="200"/>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="100"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="400"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </StackPanel>
+    
 </Window>
