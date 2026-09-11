@@ -129,6 +129,8 @@ namespace P03WeatherForecastWPF.Client.ViewModels
             }
         }
 
+       
+
 
     }
 }
