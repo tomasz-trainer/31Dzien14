@@ -1,0 +1,20 @@
+dotnet new sln 
+ 
+dotnet sln add ...(sciezka do pliku .csproj)
+
+        - Microsoft.EntityFrameworkCore - wykorzystywane do tworzenia data kontekstu
+	- Microsoft.EntityFrameworkCore.SqlServer - wykorzystywane do komunikacji z bazą danych sql server
+	- Microsoft.EntityFrameworkCore.Design - wykorzystywane do migracji
+
+
+
+Fluent API
+data annotations 
+
+
+dotnet ef (dotnet tool install --global dotnet-ef))  - instalacja dotnet ef tool
+
+dotnet ef migrations add InitialCreate
+dotnet ef migrations remove
+
+dotnet ef database update [opcjonalie nazwa migracji]
