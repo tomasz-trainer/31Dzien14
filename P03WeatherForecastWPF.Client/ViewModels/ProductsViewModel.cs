@@ -100,7 +100,7 @@ namespace P03WeatherForecastWPF.Client.ViewModels
         }
 
         [RelayCommand]
-        public async  Task SaveProductAsync()
+        public async Task SaveProductAsync()
         {
             if (_selectedProduct == null)
             {

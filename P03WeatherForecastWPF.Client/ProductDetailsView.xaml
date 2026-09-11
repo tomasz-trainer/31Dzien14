@@ -27,7 +27,7 @@
             <TextBox Text="{Binding Description}" Grid.Row="1" Grid.Column="1"></TextBox>
 
             <TextBlock Text="Barcode:" Grid.Row="2" Grid.Column="0"></TextBlock>
-            <TextBox Text="{Binding Description}" Grid.Row="2" Grid.Column="1"></TextBox>
+            <TextBox Text="{Binding Barcode}" Grid.Row="2" Grid.Column="1"></TextBox>
 
             <TextBlock Text="Price:" Grid.Row="3" Grid.Column="0"></TextBlock>
             <TextBox Text="{Binding Price}" Grid.Row="3" Grid.Column="1"></TextBox>
