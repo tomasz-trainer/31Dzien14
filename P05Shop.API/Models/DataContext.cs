@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using P06Shop.Shared;
+using P07Shop.DataSeeder;
 
 namespace P05Shop.API.Models
 {
@@ -7,7 +8,7 @@ namespace P05Shop.API.Models
     {
 
         public DbSet<Product> Products { get; set; }
-
+       
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -26,6 +27,18 @@ namespace P05Shop.API.Models
                 .Property(p=>p.Title)
                 .IsRequired()
                 .HasMaxLength(100);
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Barcode)
+                .IsRequired()
+                .HasMaxLength(12);
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(8,2)");
+
+            modelBuilder.Entity<Product>()
+                .HasData(ProductDataSeeder.GenerateProductData());
 
         }
     }
